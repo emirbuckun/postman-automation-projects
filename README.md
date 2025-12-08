@@ -32,7 +32,7 @@ Pragmatic Programmer,Andrew Hunt
 
 (Export your environment as JSON first, and point `-d` to your data file.)
 
-## Running the OAuth collection
+## Running the OAuth Collection
 1. Update the request query values for `client_id`, `client_secret`, and `redirect_uri` with your own credentials (do **not** commit real secrets).
 2. Hit **Get Code** to retrieve an authorization code (you may need to sign in and approve the consent screen).
 3. Copy the returned `code` into the **Get Access Token** request (or set it as a Postman variable) and send to obtain an `access_token`.
