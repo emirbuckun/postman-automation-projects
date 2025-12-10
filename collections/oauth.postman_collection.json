@@ -231,7 +231,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://rahulshettyacademy.com/getCourse.php?access_token=ya29.A0Aa7pCA_pc4J0ml1dQqP87GXRM1zh_xzZQ3HLmMN5BfptNZrCCbex0kwtYVrNP1-xshS58vRqvvUqHrZG4Fuwc0KvBubLwCtUlw2vZ24HFvLjqCXfqf7I1knEq7bHbporPFC5J56McJSBTZL4QliMA2SgdYKRoRG8CVSq9CX4a8TOeKEjL8_YAdpfYn4NNV4mwmkQkVVpQB6hG-U8KUKKvk4C7uMh15W_tpANoLYcRFfTzY51vwQLLbR12SERvpVjXHdq_STaWzvLWl4WNmVT7ru3R5k-aCgYKAWcSARMSFQHGX2Mi9NpRsW2X91X8F7nZ40b0-w0291",
+					"raw": "https://rahulshettyacademy.com/getCourse.php?access_token=ya29.A0Aa7pCA8HSXCDxVjhfHe21Ml53r6D1ZHX8Ec16LTruRKRPSEE7s6ZYRmAU9ynnB0ePKSstLhF8KfjUNlABspFsCDVeOSVrcyFz1tH9gIij95XXvH5GLq2BZl-V2t40hdGdsHgvRADlf87-QDROOvMI2X-7MuweYgCrZJT2eqrDtnyeHa0SV__xQJt-OG9l5jCvvzdLMKdWKigt0zS-CRrhUOmk__lqy2IUSELOUAOmb_EwrJVHvZhjFJnrRowG3Zvb83GfHhfBI_x6cJJLPQ_SFt_xslGCJIaCgYKAQgSARMSFQHGX2MikWbf90oqiADJR_ozqji38A0294",
 					"protocol": "https",
 					"host": [
 						"rahulshettyacademy",
@@ -243,7 +243,7 @@
 					"query": [
 						{
 							"key": "access_token",
-							"value": "ya29.A0Aa7pCA_pc4J0ml1dQqP87GXRM1zh_xzZQ3HLmMN5BfptNZrCCbex0kwtYVrNP1-xshS58vRqvvUqHrZG4Fuwc0KvBubLwCtUlw2vZ24HFvLjqCXfqf7I1knEq7bHbporPFC5J56McJSBTZL4QliMA2SgdYKRoRG8CVSq9CX4a8TOeKEjL8_YAdpfYn4NNV4mwmkQkVVpQB6hG-U8KUKKvk4C7uMh15W_tpANoLYcRFfTzY51vwQLLbR12SERvpVjXHdq_STaWzvLWl4WNmVT7ru3R5k-aCgYKAWcSARMSFQHGX2Mi9NpRsW2X91X8F7nZ40b0-w0291"
+							"value": "ya29.A0Aa7pCA8HSXCDxVjhfHe21Ml53r6D1ZHX8Ec16LTruRKRPSEE7s6ZYRmAU9ynnB0ePKSstLhF8KfjUNlABspFsCDVeOSVrcyFz1tH9gIij95XXvH5GLq2BZl-V2t40hdGdsHgvRADlf87-QDROOvMI2X-7MuweYgCrZJT2eqrDtnyeHa0SV__xQJt-OG9l5jCvvzdLMKdWKigt0zS-CRrhUOmk__lqy2IUSELOUAOmb_EwrJVHvZhjFJnrRowG3Zvb83GfHhfBI_x6cJJLPQ_SFt_xslGCJIaCgYKAQgSARMSFQHGX2MikWbf90oqiADJR_ozqji38A0294"
 						}
 					]
 				}
