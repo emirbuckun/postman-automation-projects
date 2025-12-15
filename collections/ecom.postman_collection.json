@@ -1,0 +1,436 @@
+{
+	"info": {
+		"_postman_id": "9c2210fe-e1b3-4a11-a31a-995e21a4e997",
+		"name": "Ecom",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26650502"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response returns token, userId and success message\", () => {",
+							"    pm.expect(jsonData).to.have.property(\"token\");",
+							"    pm.expect(jsonData).to.have.property(\"userId\");",
+							"    pm.expect(jsonData).to.have.property(\"message\");",
+							"    pm.expect(jsonData.message).to.eql(\"Login Successfully\");",
+							"});",
+							"",
+							"pm.test(\"Token is not empty\", () => {",
+							"    pm.expect(jsonData.token).to.not.be.empty;",
+							"});",
+							"",
+							"pm.test(\"User ID is not empty\", () => {",
+							"    pm.expect(jsonData.userId).to.not.be.empty;",
+							"});",
+							"",
+							"pm.collectionVariables.set(\"userId\", jsonData.userId);",
+							"pm.collectionVariables.set(\"token\", jsonData.token);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userEmail\": \"emirbuckun@hotmail.com\",\n    \"userPassword\": \"2901Emir.2901\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/auth/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Product ID is not empty\", () => {",
+							"    pm.expect(jsonData.productId).to.not.be.empty;",
+							"});",
+							"",
+							"pm.test(\"Message is correct\", () => {",
+							"    pm.expect(jsonData.message).to.eql(\"Product Added Successfully\");",
+							"});",
+							"",
+							"pm.collectionVariables.set(\"productId\", jsonData.productId);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"productName\", \"New Product\" + Math.floor(Math.random() * 1000))"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "productName",
+							"value": "{{productName}}",
+							"type": "text"
+						},
+						{
+							"key": "productAddedBy",
+							"value": "{{userId}}",
+							"type": "text"
+						},
+						{
+							"key": "productCategory",
+							"value": "fashion",
+							"type": "text"
+						},
+						{
+							"key": "productSubCategory",
+							"value": "shirts",
+							"type": "text"
+						},
+						{
+							"key": "productPrice",
+							"value": "11500",
+							"type": "text"
+						},
+						{
+							"key": "productDescription",
+							"value": "Addias Originals",
+							"type": "text"
+						},
+						{
+							"key": "productFor",
+							"value": "women",
+							"type": "text"
+						},
+						{
+							"key": "productImage",
+							"type": "file",
+							"src": "postman-cloud:///1f0d96dc-fe94-47c0-81d0-f5ae88a48cdf"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/product/add-product",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"product",
+						"add-product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Check if the order was placed successfully\", () => {",
+							"    pm.expect(jsonData.message).to.eql(\"Order Placed Successfully\");",
+							"});",
+							"",
+							"pm.test(\"Check if the order ID is present\", () => {",
+							"    pm.expect(jsonData.orders).to.have.lengthOf(1);",
+							"});",
+							"",
+							"pm.test(\"Check if the product order ID is present\", () => {",
+							"    pm.expect(jsonData.productOrderId).to.have.lengthOf(1);",
+							"});",
+							"",
+							"pm.collectionVariables.set(\"orderId\", jsonData.orders[0]);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"orders\": [\n        {\n            \"country\": \"Turkey\",\n            \"productOrderedId\": \"{{productId}}\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/order/create-order",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"order",
+						"create-order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View Order Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Order details fetched successfully\", () => {",
+							"    pm.expect(jsonData.message).to.eql(\"Orders fetched for customer Successfully\");",
+							"});",
+							"",
+							"pm.test(\"Order ID matches\", () => {",
+							"    pm.expect(jsonData.data._id).to.eql(pm.collectionVariables.get(\"orderId\"));",
+							"});",
+							"",
+							"pm.test(\"Product ID matches\", () => {",
+							"    pm.expect(jsonData.data.productOrderedId).to.eql(pm.collectionVariables.get(\"productId\"));",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/order/get-orders-details?id={{orderId}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"order",
+						"get-orders-details"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{orderId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response message is correct\", () => {",
+							"    pm.expect(jsonData.message).to.eql(\"Product Deleted Successfully\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/product/delete-product/{{productId}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"product",
+						"delete-product",
+						"{{productId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response message is success message\", function () {",
+							"    pm.expect(jsonData.message).to.eql(\"Orders Deleted Successfully\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/order/delete-order/{{orderId}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"order",
+						"delete-order",
+						"{{orderId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "userId",
+			"value": ""
+		},
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "productId",
+			"value": ""
+		},
+		{
+			"key": "orderId",
+			"value": ""
+		},
+		{
+			"key": "base_url",
+			"value": ""
+		},
+		{
+			"key": "productName",
+			"value": ""
+		}
+	]
+}
